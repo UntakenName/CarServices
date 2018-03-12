@@ -16,7 +16,7 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 @NamePattern("%s|name")
 @Table(name = "SERVICES_CUSTOMER")
 @Entity(name = "services$Customer")
-public abstract class Customer extends StandardEntity {
+public class Customer extends StandardEntity {
     private static final long serialVersionUID = 5639861158477172084L;
 
     @NotNull

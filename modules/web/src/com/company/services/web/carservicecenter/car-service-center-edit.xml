@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.company.services.web.carservicecenter.CarServiceCenterEdit"
+        datasource="carServiceCenterDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.services.web.carservicecenter">
+    <dsContext>
+        <datasource id="carServiceCenterDs"
+                    class="com.company.services.entity.CarServiceCenter"
+                    view="carServiceCenter-edit">
+            <collectionDatasource id="employeesDs"
+                                  property="employees"/>
+            <collectionDatasource id="repairsDs"
+                                  property="repairs"/>
+            <collectionDatasource id="customersDs"
+                                  property="customers"/>
+        </datasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="carServiceCenterDs">
+            <column width="250px">
+                <field property="name"/>
+                <field property="phone"/>
+                <field property="city"/>
+                <field property="address"/>
+            </column>
+        </fieldGroup>
+        <tabSheet id="services_tab_sheet">
+            <tab id="info_tab"
+                 caption="Details"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <label id="employees_label"
+                       value="Employess"/>
+                <table id="employees_table"
+                       editable="true"
+                       height="200px"
+                       width="350px">
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="firstName"/>
+                        <column id="lastName"/>
+                    </columns>
+                    <rows datasource="employeesDs"/>
+                    <buttonsPanel>
+                        <button id="employee_create_btn"
+                                action="employees_table.create"
+                                caption="Create"/>
+                        <button id="employee_edit_btn"
+                                action="employees_table.edit"
+                                caption="Edit"/>
+                        <button id="employee_remove_btn"
+                                action="employees_table.remove"
+                                caption="Remove"/>
+                    </buttonsPanel>
+                </table>
+                <label id="repairs_label"
+                       value="Repairs"/>
+                <table id="repairs_table"
+                       height="250px"
+                       width="500px">
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="id"/>
+                        <column id="despription"/>
+                    </columns>
+                    <rows datasource="repairsDs"/>
+                    <buttonsPanel>
+                        <button id="repair_create_btn"
+                                action="repairs_table.create"
+                                caption="Create"/>
+                        <button id="repair_edit_btn"
+                                action="repairs_table.edit"
+                                caption="Edit"/>
+                        <button id="repair_remove_btn"
+                                action="repairs_table.remove"
+                                caption="Remove"/>
+                    </buttonsPanel>
+                </table>
+            </tab>
+            <tab id="customers_tab"
+                 caption="Customers"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <buttonsPanel>
+                    <button id="customers_add_btn"
+                            action="customers_table.add"/>
+                    <button id="customers_remove_btn"
+                            action="customers_table.remove"/>
+                </buttonsPanel>
+                <table id="customers_table"
+                       height="250px"
+                       width="400px">
+                    <actions>
+                        <action id="add"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="name"
+                                caption="Name"/>
+                        <column id="phone"
+                                caption="Phone"/>
+                        <column id="email"
+                                caption="Email"/>
+                    </columns>
+                    <rows datasource="customersDs"/>
+                </table>
+            </tab>
+        </tabSheet>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

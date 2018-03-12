@@ -6,5 +6,6 @@
 build/*
 deploy/*
 modules/*/build/*
+modules/core/db/update/*
 out
 test-run

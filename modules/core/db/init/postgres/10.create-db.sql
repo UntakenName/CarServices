@@ -94,19 +94,9 @@ create table SERVICES_CAR_SERVICE_CENTER (
 -- end SERVICES_CAR_SERVICE_CENTER
 -- begin SERVICES_CUSTOMER_SERVICE
 create table SERVICES_CUSTOMER_SERVICE (
-    ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    --
-    CUSTOMER_ID uuid not null,
-    CAR_SERVICE_CENTER_ID uuid not null,
-    --
-    primary key (ID)
+    CENTER_ID uuid,
+    CUSTOMER_ID uuid,
+    primary key (CENTER_ID, CUSTOMER_ID)
 )^
 -- end SERVICES_CUSTOMER_SERVICE
 -- begin SERVICES_INDIVIDUAL
@@ -118,3 +108,12 @@ create table SERVICES_INDIVIDUAL (
     primary key (INDIVIDUAL_ID)
 )^
 -- end SERVICES_INDIVIDUAL
+-- begin SERVICES_COMPANY
+create table SERVICES_COMPANY (
+    CUSTOMER_ID uuid,
+    --
+    INN varchar(12) not null,
+    --
+    primary key (CUSTOMER_ID)
+)^
+-- end SERVICES_COMPANY

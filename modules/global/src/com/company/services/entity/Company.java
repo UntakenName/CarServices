@@ -8,13 +8,13 @@ package com.company.services.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import com.haulmont.cuba.core.global.DesignSupport;
+import com.haulmont.chile.core.annotations.NamePattern;
 
 /**
  *
  * @author gordeev
  */
-@DesignSupport("{'generateDdl':false}")
+@NamePattern("%s|name")
 @PrimaryKeyJoinColumn(name = "CUSTOMER_ID", referencedColumnName = "ID")
 @Table(name = "SERVICES_COMPANY")
 @Entity(name = "services$Company")

@@ -15,12 +15,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.annotation.Lookup;
+import com.haulmont.cuba.core.entity.annotation.LookupType;
 
 /**
  *
  * @author gordeev
  */
-@NamePattern("%s|id")
+@NamePattern("%s %s|id,despription")
 @Table(name = "SERVICES_REPAIR")
 @Entity(name = "services$Repair")
 public class Repair extends StandardEntity {
@@ -34,8 +36,9 @@ public class Repair extends StandardEntity {
     @JoinColumn(name = "CENTER_ID")
     protected CarServiceCenter center;
 
+    @Lookup(type = LookupType.DROPDOWN, actions = {"lookup"})
     @OnDelete(DeletePolicy.CASCADE)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "EMPLOYEE_ID")
     protected Employee employee;
 
