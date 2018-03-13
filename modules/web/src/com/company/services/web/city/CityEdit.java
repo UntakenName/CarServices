@@ -5,11 +5,14 @@
  */
 package com.company.services.web.city;
 
-import com.company.services.service.CityService;
+import com.haulmont.cuba.core.app.DataService;
+import com.haulmont.cuba.core.global.CommitContext;
+import com.haulmont.cuba.core.global.LoadContext;
 import com.haulmont.cuba.gui.components.AbstractEditor;
 import com.company.services.entity.City;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  *
@@ -18,7 +21,7 @@ import javax.inject.Inject;
 public class CityEdit extends AbstractEditor<City> {
 
     @Inject
-    private CityService cityService;
+    private DataService dataService;
 
     Boolean initialDefaultStatus;
 
@@ -31,8 +34,16 @@ public class CityEdit extends AbstractEditor<City> {
     @Override
     protected boolean postCommit(boolean committed, boolean close) {
         City item = getItem();
-        if (committed && item.getDefaultCity() && ! item.getDefaultCity().equals(initialDefaultStatus)) {
-            cityService.resetDefaultCity(item.getId());
+        if (committed && item.getDefaultCity() && !item.getDefaultCity().equals(initialDefaultStatus)) {
+            LoadContext<City> context = LoadContext.create(City.class).setQuery(
+                    LoadContext.createQuery("select c from services$City c where c.id <> :itemId and c.defaultCity = true")
+                            .setParameter("itemId", item.getId())
+            );
+            List<City> list = dataService.loadList(context);
+            for (City city : list) {
+                city.setDefaultCity(false);
+            }
+            dataService.commit(new CommitContext(list));
         }
         return super.postCommit(committed, close);
     }

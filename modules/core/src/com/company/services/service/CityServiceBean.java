@@ -32,14 +32,4 @@ public class CityServiceBean implements CityService {
                 "select c from services$City c where c.defaultCity = true", City.class);
         return query.getFirstResult();
     }
-
-    @Transactional
-    @Override
-    public void resetDefaultCity(UUID cityId) {
-        Query query = persistence.getEntityManager().createQuery(
-                "update services$City c set c.defaultCity = false where c.id <> :cityId"
-        );
-        query.setParameter("cityId",cityId);
-        query.executeUpdate();
-    }
 }
