@@ -7,13 +7,11 @@ package com.company.services.service;
 
 import com.company.services.entity.City;
 import com.haulmont.cuba.core.Persistence;
-import com.haulmont.cuba.core.Query;
 import com.haulmont.cuba.core.TypedQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.UUID;
 
 /**
  *
@@ -25,11 +23,12 @@ public class CityServiceBean implements CityService {
     @Inject
     private Persistence persistence;
 
+    private static final String SELECT_DEFAULT_CITY = "select c from services$City c where c.defaultCity = true";
+
     @Transactional
     @Override
     public City getDefaultCity() {
-        TypedQuery<City> query = persistence.getEntityManager().createQuery(
-                "select c from services$City c where c.defaultCity = true", City.class);
+        TypedQuery<City> query = persistence.getEntityManager().createQuery(SELECT_DEFAULT_CITY, City.class);
         return query.getFirstResult();
     }
 }

@@ -11,11 +11,13 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.annotation.Listeners;
 
 /**
  *
  * @author gordeev
  */
+@Listeners("services_DefaultCityEntityListener")
 @NamePattern("%s|name")
 @Table(name = "SERVICES_CITY")
 @Entity(name = "services$City")
@@ -56,6 +58,4 @@ public class City extends StandardEntity {
     public String getCode() {
         return code;
     }
-
-
 }
