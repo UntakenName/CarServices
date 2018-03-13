@@ -5,15 +5,11 @@
  */
 package com.company.services.web.carservicecenter;
 
-import com.company.services.entity.Employee;
+import com.company.services.service.CityService;
 import com.haulmont.cuba.gui.components.AbstractEditor;
 import com.company.services.entity.CarServiceCenter;
-import com.haulmont.cuba.gui.components.Component;
-import com.haulmont.cuba.gui.data.CollectionDatasource;
 
 import javax.inject.Inject;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  *
@@ -22,7 +18,11 @@ import java.util.UUID;
 public class CarServiceCenterEdit extends AbstractEditor<CarServiceCenter> {
 
     @Inject
-    private CollectionDatasource<Employee, UUID> employeesDs;
+    private CityService cityService;
 
-
+    @Override
+    protected void initNewItem(CarServiceCenter item) {
+        super.initNewItem(item);
+        item.setCity(cityService.getDefaultCity());
+    }
 }

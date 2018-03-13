@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
     <include file="com/company/services/screens.xml"/>
-    <screen id="services$City.browse"
-            template="com/company/services/web/city/city-browse.xml"/>
     <screen id="services$City.edit"
             template="com/company/services/web/city/city-edit.xml"/>
     <screen id="services$Company.browse"
@@ -23,4 +21,6 @@
             template="com/company/services/web/repair/repair-edit.xml"/>
     <screen id="services$Customer.browse"
             template="com/company/services/web/customer/customer-browse.xml"/>
+    <screen id="services$City.browse"
+            template="com/company/services/web/city/city-browse.xml"/>
 </screen-config>

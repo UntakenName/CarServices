@@ -33,6 +33,7 @@
             <columns>
                 <column id="name"/>
                 <column id="code"/>
+                <column id="defaultCity"/>
             </columns>
             <rows datasource="citiesDs"/>
             <rowsCount/>

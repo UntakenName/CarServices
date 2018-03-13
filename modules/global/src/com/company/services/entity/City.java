@@ -30,6 +30,17 @@ public class City extends StandardEntity {
     @Column(name = "CODE", nullable = false)
     protected String code;
 
+    @Column(name = "DEFAULT_CITY")
+    protected Boolean defaultCity;
+
+    public void setDefaultCity(Boolean defaultCity) {
+        this.defaultCity = defaultCity;
+    }
+
+    public Boolean getDefaultCity() {
+        return defaultCity;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

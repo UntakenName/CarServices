@@ -69,6 +69,7 @@ create table SERVICES_CITY (
     --
     NAME varchar(255) not null,
     CODE varchar(255) not null,
+    DEFAULT_CITY boolean,
     --
     primary key (ID)
 )^

@@ -50,7 +50,6 @@ public class Repair extends StandardEntity {
         return center;
     }
 
-
     public void setDespription(String despription) {
         this.despription = despription;
     }
