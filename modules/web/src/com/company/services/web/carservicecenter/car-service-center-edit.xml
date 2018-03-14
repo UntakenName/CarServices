@@ -103,18 +103,18 @@
                 </buttonsPanel>
                 <table id="customers_table"
                        height="250px"
-                       width="400px">
+                       width="100%">
                     <actions>
                         <action id="add"/>
                         <action id="remove"/>
                     </actions>
                     <columns>
                         <column id="name"
-                                caption="Name"/>
+                                caption="msg://Name"/>
                         <column id="phone"
-                                caption="Phone"/>
+                                caption="msg://Phone"/>
                         <column id="email"
-                                caption="Email"/>
+                                caption="msg://Email"/>
                     </columns>
                     <rows datasource="customersDs"/>
                 </table>

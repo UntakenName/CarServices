@@ -9,7 +9,9 @@ import com.company.services.entity.Customer;
 import com.company.services.service.CityService;
 import com.haulmont.cuba.gui.components.AbstractEditor;
 import com.company.services.entity.CarServiceCenter;
+import com.haulmont.cuba.gui.components.Component;
 import com.haulmont.cuba.gui.components.TabSheet;
+import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.data.CollectionDatasource;
 
 import javax.inject.Inject;
@@ -22,6 +24,11 @@ import java.util.UUID;
  */
 public class CarServiceCenterEdit extends AbstractEditor<CarServiceCenter> {
 
+    private enum CustomerType {
+        INDIVIDUAL,
+        COMPANY
+    }
+
     @Inject
     private CityService cityService;
 
@@ -30,6 +37,9 @@ public class CarServiceCenterEdit extends AbstractEditor<CarServiceCenter> {
 
     @Inject
     private TabSheet services_tab_sheet;
+
+    @Inject
+    private Table<Customer> customers_table;
 
     @Override
     protected void initNewItem(CarServiceCenter item) {
@@ -49,5 +59,16 @@ public class CarServiceCenterEdit extends AbstractEditor<CarServiceCenter> {
                         .setCaption("Customers (" + customerAmount.toString() + ")");
             }
         });
+        customers_table.addGeneratedColumn("type", new Table.ColumnGenerator<Customer>() {
+            @Override
+            public Component generateCell(Customer entity) {
+                String customerTypeLiteral = entity.getClass().toString();
+                customerTypeLiteral = customerTypeLiteral.substring(customerTypeLiteral.lastIndexOf('.') + 1);
+                CustomerType customerType = CustomerType.valueOf(customerTypeLiteral.toUpperCase());
+                return new Table.PlainTextCell(messages.getMessage(customerType));
+            }
+        });
+        String caption = messages.getMessage("com.company.services.web.carservicecenter","Type");
+        customers_table.getColumn("type").setCaption(caption);
     }
 }
