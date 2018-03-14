@@ -13,7 +13,6 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.util.Set;
@@ -23,6 +22,7 @@ import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 
 /**
  *
@@ -41,10 +41,10 @@ public class CarServiceCenter extends StandardEntity {
     @Column(name = "PHONE", length = 10)
     protected String phone;
 
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     @Lookup(type = LookupType.SCREEN, actions = {"lookup", "open"})
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(optional = false)
     @NotNull
-    @OnDelete(DeletePolicy.CASCADE)
     @JoinColumn(name = "CITY_ID")
     protected City city;
 
@@ -52,22 +52,23 @@ public class CarServiceCenter extends StandardEntity {
     @Column(name = "ADDRESS", nullable = false)
     protected String address;
 
-    @Composition
+    @OnDeleteInverse(DeletePolicy.UNLINK)
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "center")
     protected Set<Employee> employees;
 
-
     @Composition
+    @OnDeleteInverse(DeletePolicy.UNLINK)
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "center")
     protected Set<Repair> repairs;
 
+    @OnDeleteInverse(DeletePolicy.UNLINK)
+    @OnDelete(DeletePolicy.UNLINK)
     @JoinTable(name = "SERVICES_CUSTOMER_SERVICE",
         joinColumns = @JoinColumn(name = "CENTER_ID"),
         inverseJoinColumns = @JoinColumn(name = "CUSTOMER_ID"))
     @ManyToMany
-    @OnDelete(DeletePolicy.UNLINK)
     protected Set<Customer> customers;
 
     public Set<Customer> getCustomers() {
@@ -77,8 +78,6 @@ public class CarServiceCenter extends StandardEntity {
     public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
     }
-
-
 
     public void setRepairs(Set<Repair> repairs) {
         this.repairs = repairs;
@@ -97,7 +96,6 @@ public class CarServiceCenter extends StandardEntity {
         return employees;
     }
 
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -114,7 +112,6 @@ public class CarServiceCenter extends StandardEntity {
         return city;
     }
 
-
     public void setAddress(String address) {
         this.address = address;
     }
@@ -123,7 +120,6 @@ public class CarServiceCenter extends StandardEntity {
         return address;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
@@ -131,6 +127,4 @@ public class CarServiceCenter extends StandardEntity {
     public String getName() {
         return name;
     }
-
-
 }

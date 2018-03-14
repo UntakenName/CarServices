@@ -49,7 +49,7 @@ create table SERVICES_REPAIR (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    DESPRIPTION varchar(255),
+    DESCRIPTION varchar(255),
     CENTER_ID uuid,
     EMPLOYEE_ID uuid,
     --

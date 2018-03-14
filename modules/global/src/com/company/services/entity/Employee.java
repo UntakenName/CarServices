@@ -15,9 +15,11 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
 
 /**
  *
@@ -49,8 +51,9 @@ public class Employee extends StandardEntity {
     @Column(name = "SALARY", nullable = false, precision = 10, scale = 2)
     protected BigDecimal salary;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(DeletePolicy.UNLINK)
+    @OnDeleteInverse(DeletePolicy.CASCADE)
+    @ManyToOne
     @JoinColumn(name = "CENTER_ID")
     protected CarServiceCenter center;
 
@@ -61,7 +64,6 @@ public class Employee extends StandardEntity {
     public CarServiceCenter getCenter() {
         return center;
     }
-
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -102,6 +104,4 @@ public class Employee extends StandardEntity {
     public BigDecimal getSalary() {
         return salary;
     }
-
-
 }

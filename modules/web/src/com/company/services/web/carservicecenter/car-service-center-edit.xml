@@ -39,7 +39,7 @@
                        value="Employess"/>
                 <table id="employees_table"
                        editable="true"
-                       height="200px"
+                       height="150px"
                        width="350px">
                     <actions>
                         <action id="create"/>
@@ -66,7 +66,7 @@
                 <label id="repairs_label"
                        value="Repairs"/>
                 <table id="repairs_table"
-                       height="250px"
+                       height="150px"
                        width="500px">
                     <actions>
                         <action id="create"/>
@@ -75,7 +75,7 @@
                     </actions>
                     <columns>
                         <column id="id"/>
-                        <column id="despription"/>
+                        <column id="description"/>
                     </columns>
                     <rows datasource="repairsDs"/>
                     <buttonsPanel>
