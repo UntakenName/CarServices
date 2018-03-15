@@ -25,7 +25,7 @@ public class City extends StandardEntity {
     private static final long serialVersionUID = 775669117848227651L;
 
     @NotNull
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "NAME", nullable = false, unique = true)
     protected String name;
 
     @NotNull
