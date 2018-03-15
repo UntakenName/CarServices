@@ -41,7 +41,7 @@ public class CarServiceCenter extends StandardEntity {
     @Column(name = "PHONE", length = 10)
     protected String phone;
 
-    @OnDeleteInverse(DeletePolicy.CASCADE)
+    @OnDeleteInverse(DeletePolicy.DENY)
     @Lookup(type = LookupType.SCREEN, actions = {"lookup", "open"})
     @ManyToOne(optional = false)
     @NotNull
@@ -64,7 +64,6 @@ public class CarServiceCenter extends StandardEntity {
     protected Set<Repair> repairs;
 
     @OnDeleteInverse(DeletePolicy.UNLINK)
-    @OnDelete(DeletePolicy.UNLINK)
     @JoinTable(name = "SERVICES_CUSTOMER_SERVICE",
         joinColumns = @JoinColumn(name = "CENTER_ID"),
         inverseJoinColumns = @JoinColumn(name = "CUSTOMER_ID"))
@@ -86,7 +85,6 @@ public class CarServiceCenter extends StandardEntity {
     public Set<Repair> getRepairs() {
         return repairs;
     }
-
 
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;

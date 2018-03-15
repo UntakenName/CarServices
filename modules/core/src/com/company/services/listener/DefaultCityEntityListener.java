@@ -40,10 +40,11 @@ public class DefaultCityEntityListener implements BeforeInsertEntityListener<Cit
 
     @Override
     public void onBeforeInsert(City entity, EntityManager entityManager) {
-        if (entity.getDefaultCity()) {
+        if (entity.getDefaultCity() == null) {
+            entity.setDefaultCity(false);
+        } else if (entity.getDefaultCity()) {
             selfInjectionForTransactionalProxy.updateDefaultCityValues(null, entityManager);
         }
-
     }
 
     @Override
