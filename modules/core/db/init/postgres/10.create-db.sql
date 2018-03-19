@@ -89,6 +89,7 @@ create table SERVICES_CAR_SERVICE_CENTER (
     PHONE varchar(10),
     CITY_ID uuid not null,
     ADDRESS varchar(255) not null,
+    CREATOR_ID uuid not null,
     --
     primary key (ID)
 )^
